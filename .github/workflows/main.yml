@@ -34,6 +34,10 @@ jobs:
 
       - name: TF init and validate
         run: |
-          echo "TF init"...
+          echo "TF Init"...
           terraform init
 
+      - name: TF validate
+        run: |
+          echo "TF Validate"...
+          terraform validate
