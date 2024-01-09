@@ -32,12 +32,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: TF init and validate
+      - name: TF Init
         run: |
           echo "TF Init"...
           terraform init
 
-      - name: TF validate
+      - name: TF Validate
         run: |
           echo "TF Validate"...
           terraform validate
+
+      - name: TF Format
+        run: |
+          echo "TF Format"...
+          terraform fmt
