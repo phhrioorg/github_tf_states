@@ -13,19 +13,9 @@ output "state_bucket" {
   value       = aws_s3_bucket.state
 }
 
-output "replica_bucket" {
-  description = "The S3 bucket to replicate the state S3 bucket."
-  value       = try(aws_s3_bucket.replica[0], null)
-}
-
 output "dynamodb_table" {
   description = "The DynamoDB table to manage lock states."
   value       = aws_dynamodb_table.lock
-}
-
-output "kms_key_replica" {
-  description = "The KMS customer master key to encrypt replica bucket and dynamodb."
-  value       = try(aws_kms_key.replica[0], null)
 }
 
 output "terraform_iam_policy" {
