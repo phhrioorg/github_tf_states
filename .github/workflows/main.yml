@@ -1,5 +1,4 @@
 name: TF_STATE
-runs-on: self-hosted
 on:
   push:
     branches:
@@ -12,7 +11,8 @@ permissions:
   contents: read
 jobs:
   AssumeRoleAndCallIdentity:
-    runs-on: ubuntu-latest  
+    runs-on: self-hosted
+#    runs-on: ubuntu-latest  
     steps:
       - name: Git clone the repository
         uses: actions/checkout@master
