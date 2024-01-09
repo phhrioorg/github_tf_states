@@ -21,24 +21,12 @@ jobs:
       - name: Sts GetCallerIdentity
         run:
           aws sts get-caller-identity
-          
-  validate-terraform:
-    name: Validate Terraform
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: examples
-    steps:
+
       - uses: hashicorp/setup-terraform@v1
       - name: Checkout
+
         uses: actions/checkout@v2
-      - name: Check examples
-        env:
-          EXAMPLES: simple
+      - name: TF init and validate
         run: |
-          for EXAMPLE in ${EXAMPLES}
-          do
-            echo "Validating $EXAMPLE"...
-            cd $EXAMPLE && terraform init && terraform validate && cd -
-          done
+          echo "Validating $EXAMPLE"...
+          terraform init && terraform validate
