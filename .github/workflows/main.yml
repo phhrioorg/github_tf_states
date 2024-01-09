@@ -28,7 +28,7 @@ jobs:
         run:
           aws sts get-caller-identity
 
-      - uses: hashicorp/setup-terraform@v3.0.0
+#      - uses: hashicorp/setup-terraform@v3.0.0
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -36,9 +36,4 @@ jobs:
         run: |
           echo "TF init"...
           terraform init
-
-      - name: TF init and validate
-        run: |
-          echo "TF Validate"...
-          terraform terraform validate
 
