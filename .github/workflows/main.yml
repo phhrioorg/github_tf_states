@@ -5,22 +5,25 @@ on:
       - main
   pull_request:
 jobs:
-  pre-commit-checks:
-    name: Pre-commit checks
-    runs-on: ubuntu-latest
+  AssumeRoleAndCallIdentity:
+    runs-on: ubuntu-latest  
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Terraform min/max versions
-        id: minMax
-        uses: clowdhaus/terraform-min-max@v1.0.4
-      - name: Pre-commit Terraform ${{ steps.minMax.outputs.maxVersion }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.4.1
+      - name: Git clone the repository
+        uses: actions/checkout@master
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
-          terraform-version: ${{ steps.minMax.outputs.maxVersion }}
-          terraform-docs-version: v0.16.0
-  validate-examples:
-    name: Validate examples
+          role-to-assume: arn:aws:iam::407026129471:role/GitHubAction-AssumeRoleWithAction
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sts GetCallerIdentity
+        run:
+          aws sts get-caller-identity
+          
+  validate-terraform:
+    name: Validate Terraform
     runs-on: ubuntu-latest
     defaults:
       run:
