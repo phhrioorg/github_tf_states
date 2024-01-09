@@ -30,9 +30,15 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v3.0.0
       - name: Checkout
-
         uses: actions/checkout@v2
+
       - name: TF init and validate
         run: |
-          echo "Validating $EXAMPLE"...
-          terraform init && terraform validate
+          echo "TF init"...
+          terraform init
+
+      - name: TF init and validate
+        run: |
+          echo "TF Validate"...
+          terraform terraform validate
+
