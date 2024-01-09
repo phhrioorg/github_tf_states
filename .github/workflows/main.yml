@@ -1,4 +1,5 @@
 name: TF_STATE
+runs-on: self-hosted
 on:
   push:
     branches:
