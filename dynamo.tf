@@ -41,4 +41,4 @@ resource "aws_dynamodb_table" "lock" {
 #  stream_view_type = var.enable_replication ? "NEW_AND_OLD_IMAGES" : null
 #
 #  tags = var.tags
-#}
+}
