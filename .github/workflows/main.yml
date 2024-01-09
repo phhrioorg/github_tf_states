@@ -11,7 +11,7 @@ permissions:
   contents: read
 jobs:
   AssumeRoleAndCallIdentity:
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux, X64]
 #    runs-on: ubuntu-latest  
     steps:
       - name: Git clone the repository
