@@ -10,7 +10,7 @@ resource "aws_kms_key" "this" {
   description             = var.kms_key_description
   deletion_window_in_days = var.kms_key_deletion_window_in_days
   enable_key_rotation     = var.kms_key_enable_key_rotation
-  tags = var.tags
+  tags                    = var.tags
 }
 
 resource "aws_kms_alias" "this" {
@@ -48,8 +48,8 @@ data "aws_iam_policy_document" "state_force_ssl" {
 #---------------------------------------------------------------------------------------------------
 
 resource "aws_s3_bucket_policy" "state_force_ssl" {
-  bucket = aws_s3_bucket.state.id
-  policy = data.aws_iam_policy_document.state_force_ssl.json
+  bucket     = aws_s3_bucket.state.id
+  policy     = data.aws_iam_policy_document.state_force_ssl.json
   depends_on = [aws_s3_bucket_public_access_block.state]
 }
 
@@ -57,7 +57,7 @@ resource "aws_s3_bucket" "state" {
   bucket_prefix = var.override_s3_bucket_name ? null : var.state_bucket_prefix
   bucket        = var.override_s3_bucket_name ? var.s3_bucket_name : null
   force_destroy = var.s3_bucket_force_destroy
-  tags = var.tags
+  tags          = var.tags
 }
 
 resource "aws_s3_bucket_ownership_controls" "state" {
@@ -81,7 +81,7 @@ resource "aws_s3_bucket_versioning" "state" {
 }
 
 resource "aws_s3_bucket_logging" "state" {
-  count = var.s3_logging_target_bucket != null ? 1 : 0
+  count         = var.s3_logging_target_bucket != null ? 1 : 0
   bucket        = aws_s3_bucket.state.id
   target_bucket = var.s3_logging_target_bucket
   target_prefix = var.s3_logging_target_prefix

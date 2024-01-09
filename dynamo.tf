@@ -29,14 +29,14 @@ resource "aws_dynamodb_table" "lock" {
     enabled = true
   }
 
-#  dynamic "replica" {
-#    for_each = var.enable_replication == true ? [1] : []
-#    content {
-#      region_name = "eu-west-2"
-#      kms_key_arn = var.dynamodb_enable_server_side_encryption ? aws_kms_key.replica[0].arn : null
-#    }
-#  }
-#  stream_view_type = var.enable_replication ? "NEW_AND_OLD_IMAGES" : null
-#
-#  tags = var.tags
+  #  dynamic "replica" {
+  #    for_each = var.enable_replication == true ? [1] : []
+  #    content {
+  #      region_name = "eu-west-2"
+  #      kms_key_arn = var.dynamodb_enable_server_side_encryption ? aws_kms_key.replica[0].arn : null
+  #    }
+  #  }
+  #  stream_view_type = var.enable_replication ? "NEW_AND_OLD_IMAGES" : null
+  #
+  #  tags = var.tags
 }
