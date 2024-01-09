@@ -2,9 +2,6 @@ locals {
   define_lifecycle_rule = var.noncurrent_version_expiration != null || length(var.noncurrent_version_transitions) > 0
 }
 
-data "aws_region" "state" {
-}
-
 #---------------------------------------------------------------------------------------------------
 # KMS Key to Encrypt S3 Bucket
 #---------------------------------------------------------------------------------------------------
