@@ -1,4 +1,4 @@
-name: CI
+name: TF_STATE
 on:
   push:
     branches:
