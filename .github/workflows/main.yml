@@ -37,6 +37,7 @@ jobs:
       - name: Terraform Init
         run: |
           echo "Terraform Init"...
+          echo "Branch ${{ GITHUB_REF }}"...
           terraform init
 
       - name: Terraform Validate
