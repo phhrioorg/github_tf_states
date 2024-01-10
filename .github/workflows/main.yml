@@ -28,6 +28,8 @@ jobs:
       - name: Sts GetCallerIdentity
         run:
           aws sts get-caller-identity
+  Check terraform setup:
+    runs-on: [self-hosted, linux, X64]
     steps:
 #      - uses: hashicorp/setup-terraform@v3.0.0
       - name: Checkout
