@@ -40,7 +40,7 @@ jobs:
           echo "Branch ${{ github.ref }}"...        # refs/head/main
           echo "Branch ${{ github.base_ref }}"...
           echo "Branch ${{ github.ref_name }}"...   # main
-          echo "Branch ${{ github.ref_type }}"...   # branch
+          echo "Branch ${{ github.ref_type }}"...   # branch ?
           echo "Branch ${{ github.workspace }}"...  # /home/paul/actions-runner/_work/github_tf_states/github_tf_states
           terraform init
 
