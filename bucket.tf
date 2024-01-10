@@ -1,3 +1,4 @@
+
 locals {
   define_lifecycle_rule = var.noncurrent_version_expiration != null || length(var.noncurrent_version_transitions) > 0
 }
