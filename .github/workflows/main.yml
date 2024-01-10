@@ -30,18 +30,17 @@ jobs:
       - name: Sts GetCallerIdentity
         run: |
           aws sts get-caller-identity
-          aws help
           aws s3 ls
           echo "Checking for file at s3://${AWS_S3_BUCKET}/${FILE}"
-          # Execute a head-object command
-          aws s3api head-object --bucket ${{ github.workspace }} --key ${FILE}
-          # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
-          if [ $? == 0 ]
-          then
-            echo "::set-output name=exists::true"
-          else
-            echo "::set-output name=exists::false"
-          fi
+#          # Execute a head-object command
+#          aws s3api head-object --bucket ${{ github.workspace }} --key ${FILE}
+#          # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
+#          if [ $? == 0 ]
+#          then
+#            echo "::set-output name=exists::true"
+#          else
+#            echo "::set-output name=exists::false"
+#          fi
 
 
 #      - uses: hashicorp/setup-terraform@v3.0.0
@@ -51,11 +50,16 @@ jobs:
       - name: Terraform Init
         run: |
           echo "Terraform Init TEST-BUILD"...
-          echo "Branch ${{ github.ref }}"...        # refs/head/main
-          echo "Branch ${{ github.base_ref }}"...
-          echo "Branch ${{ github.ref_name }}"...   # main
-          echo "Branch ${{ github.ref_type }}"...   # branch ?
-          echo "Branch ${{ github.workspace }}"...  # /home/paul/actions-runner/_work/github_tf_states/github_tf_states
+          echo "GITHUB_REF               ${{ github.ref }}"...        # refs/head/main
+          echo "GITHUB_BASE_REF          ${{ github.base_ref }}"...   
+          echo "GITHUB_REF_NAME          ${{ github.ref_name }}"...   # main
+          echo "GITHUB_REF_TYPE          ${{ github.ref_type }}"...   
+          echo "GITHUB_WORKSPACE         ${{ github.workspace }}"...  # /home/paul/actions-runner/_work/github_tf_states/github_tf_states
+          echo "GITHUB_ACTION_REPOSITORY ${{ github.action_repository }}"...
+          echo "GITHUB_HEAD_REF          ${{ github.head_ref }}"...
+          echo "GITHUB_REPOSITORY        ${{ github.repository }}"...
+          echo "GITHUB_REPOSITORY_OWNER  ${{ github.repository_owner}}"...
+          
           terraform init
 
       - name: Terraform Validate
