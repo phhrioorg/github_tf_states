@@ -2,10 +2,8 @@ name: TF_STATE
 on:
   push:
     branches:
-      - main
-  deployment:
-    branches:
-      - test
+      - 'main'
+      - 'test'
 #env:
 #  AWS_ACCOUNT: '407026129471'
 #  AWS_REGION: 'eu-west-2'
