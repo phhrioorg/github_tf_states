@@ -11,13 +11,14 @@ permissions:
   id-token: write
   contents: read
 jobs:
-  Initialise state file repoository:
+  Initialise_state_file_repoository:
     runs-on: [self-hosted, linux, X64]
-#    runs-on: ubuntu-latest  
+#   runs-on: ubuntu-latest  
+
     steps:
       - name: Git clone the repository
         uses: actions/checkout@master
-
+        
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
@@ -28,7 +29,7 @@ jobs:
       - name: Sts GetCallerIdentity
         run:
           aws sts get-caller-identity
-    steps2:
+
 #      - uses: hashicorp/setup-terraform@v3.0.0
       - name: Checkout
         uses: actions/checkout@v2
@@ -47,6 +48,7 @@ jobs:
         run: |
           echo "Terraform Format"...
           terraform fmt
+
       - name: Terraform Plan
         run: |
           echo "Terraform Plan"...
