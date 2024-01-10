@@ -29,7 +29,7 @@ jobs:
       - name: Sts GetCallerIdentity
         run:
           aws sts get-caller-identity
-          aws s3 ls 
+          aws help
 
 #      - uses: hashicorp/setup-terraform@v3.0.0
       - name: Checkout
