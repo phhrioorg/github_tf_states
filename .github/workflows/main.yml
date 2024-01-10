@@ -4,9 +4,9 @@ on:
     branches:
       - main
   pull_request:
-env:
-  AWS_ACCOUNT: '407026129471'
-  AWS_REGION: 'eu-west-2'
+#env:
+#  AWS_ACCOUNT: '407026129471'
+#  AWS_REGION: 'eu-west-2'
 permissions:
   id-token: write
   contents: read
@@ -37,12 +37,11 @@ jobs:
       - name: Terraform Init
         run: |
           echo "Terraform Init"...
-          echo "Branch ${{ github.ref }}"...
+          echo "Branch ${{ github.ref }}"...        # refs/head/main
           echo "Branch ${{ github.base_ref }}"...
-          echo "Branch ${{ github.ref_name }}"...
-          echo "Branch ${{ github.ref_type }}"...
-          echo "Branch ${{ github.workspace }}"...
-          echo "Branch ${{ github.ref }}"...
+          echo "Branch ${{ github.ref_name }}"...   # main
+          echo "Branch ${{ github.ref_type }}"...   # branch
+          echo "Branch ${{ github.workspace }}"...  # /home/paul/actions-runner/_work/github_tf_states/github_tf_states
           terraform init
 
       - name: Terraform Validate
