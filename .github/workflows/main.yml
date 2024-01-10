@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - test-build
   pull_request:
 #env:
 #  AWS_ACCOUNT: '407026129471'
