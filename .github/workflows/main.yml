@@ -50,15 +50,15 @@ jobs:
       - name: Terraform Init
         run: |
           echo "Terraform Init TEST-BUILD"...
-          echo "GITHUB_REF               ${{ github.ref }}"...        # refs/head/main
-          echo "GITHUB_BASE_REF          ${{ github.base_ref }}"...   
-          echo "GITHUB_REF_NAME          ${{ github.ref_name }}"...   # main
-          echo "GITHUB_REF_TYPE          ${{ github.ref_type }}"...   
-          echo "GITHUB_WORKSPACE         ${{ github.workspace }}"...  # /home/paul/actions-runner/_work/github_tf_states/github_tf_states
-          echo "GITHUB_ACTION_REPOSITORY ${{ github.action_repository }}"...
-          echo "GITHUB_HEAD_REF          ${{ github.head_ref }}"...
-          echo "GITHUB_REPOSITORY        ${{ github.repository }}"...
-          echo "GITHUB_REPOSITORY_OWNER  ${{ github.repository_owner}}"...
+          echo "GITHUB_REF               ${{ github.ref }}"...               # refs/heads/[<BRANCH> | test-build | main]
+          echo "GITHUB_BASE_REF          ${{ github.base_ref }}"...          # 
+          echo "GITHUB_REF_NAME          ${{ github.ref_name }}"...          # <BRANCH> | test-build | main
+          echo "GITHUB_REF_TYPE          ${{ github.ref_type }}"...          # branch | test-build | ""
+          echo "GITHUB_WORKSPACE         ${{ github.workspace }}"...         # /home/paul/actions-runner/_work/github_tf_states/github_tf_states
+          echo "GITHUB_ACTION_REPOSITORY ${{ github.action_repository }}"... # 
+          echo "GITHUB_HEAD_REF          ${{ github.head_ref }}"...          # 
+          echo "GITHUB_REPOSITORY        ${{ github.repository }}"...        # phhrioorg/github_tf_states
+          echo "GITHUB_REPOSITORY_OWNER  ${{ github.repository_owner}}"...   # phhrioorg
           
           terraform init
 
