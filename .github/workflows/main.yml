@@ -4,7 +4,8 @@ on:
     branches:
       - 'main'
       - 'test-build'
-#env:
+env:
+    FILE: 'test'
 #    AWS_ACCOUNT: '407026129471'
 #    AWS_REGION: 'eu-west-2'
 permissions:
