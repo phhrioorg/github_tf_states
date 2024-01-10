@@ -3,8 +3,9 @@ on:
   push:
     branches:
       - main
-      - test-build
-  pull_request:
+  deployment:
+    branches:
+      - test
 #env:
 #  AWS_ACCOUNT: '407026129471'
 #  AWS_REGION: 'eu-west-2'
@@ -37,7 +38,7 @@ jobs:
 
       - name: Terraform Init
         run: |
-          echo "Terraform Init"...
+          echo "Terraform Init TEST-BUILD"...
           echo "Branch ${{ github.ref }}"...        # refs/head/main
           echo "Branch ${{ github.base_ref }}"...
           echo "Branch ${{ github.ref_name }}"...   # main
