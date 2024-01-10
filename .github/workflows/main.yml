@@ -27,9 +27,10 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Sts GetCallerIdentity
-        run:
+        run: |
           aws sts get-caller-identity
           aws help
+          aws s3 ls
 
 #      - uses: hashicorp/setup-terraform@v3.0.0
       - name: Checkout
