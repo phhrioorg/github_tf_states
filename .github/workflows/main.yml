@@ -11,7 +11,7 @@ permissions:
   id-token: write
   contents: read
 jobs:
-  AssumeRoleAndCallIdentity:
+  Initialise state file repoository:
     runs-on: [self-hosted, linux, X64]
 #    runs-on: ubuntu-latest  
     steps:
@@ -28,22 +28,22 @@ jobs:
       - name: Sts GetCallerIdentity
         run:
           aws sts get-caller-identity
-
+    steps:
 #      - uses: hashicorp/setup-terraform@v3.0.0
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: TF Init
+      - name: Terraform Init
         run: |
-          echo "TF Init"...
+          echo "Terraform Init"...
           terraform init
 
-      - name: TF Validate
+      - name: Terraform Validate
         run: |
-          echo "TF Validate"...
+          echo "Terraform Validate"...
           terraform validate
 
-      - name: TF Format
+      - name: Terraform Format
         run: |
-          echo "TF Format"...
+          echo "Terraform Format"...
           terraform fmt
