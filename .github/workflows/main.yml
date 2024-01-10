@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - 'main'
-      - 'test'
+      - 'test-build'
 #env:
 #    AWS_ACCOUNT: '407026129471'
 #    AWS_REGION: 'eu-west-2'
