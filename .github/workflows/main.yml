@@ -5,8 +5,8 @@ on:
       - 'main'
       - 'test'
 #env:
-#  AWS_ACCOUNT: '407026129471'
-#  AWS_REGION: 'eu-west-2'
+#    AWS_ACCOUNT: '407026129471'
+#    AWS_REGION: 'eu-west-2'
 permissions:
   id-token: write
   contents: read
