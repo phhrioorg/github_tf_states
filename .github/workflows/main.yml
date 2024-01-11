@@ -32,6 +32,8 @@ jobs:
 
       - name: Sts GetCallerIdentity
         run: |
+          env
+          echo "CHECK ENV VARIABLES ${{ vars.GITHUB_VAR }}"
           aws sts get-caller-identity
           aws s3 ls
           echo "Checking for file at s3://${AWS_S3_BUCKET}/${FILE}"
