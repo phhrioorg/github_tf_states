@@ -47,6 +47,7 @@ jobs:
           else
             echo "STATE FILE DOESN'T EXIST"
           fi
+          
 #      - uses: hashicorp/setup-terraform@v3.0.0
       - name: Checkout
         uses: actions/checkout@v2
@@ -57,6 +58,11 @@ jobs:
           echo "Terraform State File does NOT exist yet"...       
           cd init_states
           terraform init
+
+      - name: Terraform Plan
+        if: ${{ env.STATE_FILE_STATE == 0 }}
+        run: |
+          echo "Terraform State File does NOT exist yet"...       
           terraform plan -var="state_bucket_prefix=$BUCKET"
 
       - name: Terraform Validate
