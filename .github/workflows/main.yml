@@ -19,7 +19,8 @@ jobs:
 #   runs-on: ubuntu-latest  
 
     environment:
-      name: development
+#      name: development
+      name: staging
 
     steps:
       - name: Git clone the repository
