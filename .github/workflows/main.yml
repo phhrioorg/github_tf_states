@@ -11,6 +11,7 @@ env:
     BRANCH_NAME:      '${{ github.ref_name }}'
     BUCKET:           '${{ vars.TF_STATES_BUCKET }}'
     STATE_FILE:       '${{ vars.TF_STATES_FILE}}'
+    STATE_FILE_EXISTS: 0
 
 permissions:
   id-token: write
@@ -45,14 +46,14 @@ jobs:
           echo "#########################################################################################################################"
           # Execute a head-object command
           set -e
-          aws s3api head-object --bucket $BUCKET --key $STATE_FILE  && returncode=$? || returncode=$?
-          echo $returncode
+          aws s3api head-object --bucket $BUCKET --key $STATE_FILE  && STATE_FILE_EXISTS=$? || STATE_FILE_EXISTS=$?
+          echo $STATE_FILE_EXISTS
           # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
-          if [ $returncode == 0 ]
+          if [ $STATE_FILE_EXISTS == 0 ]
           then
-            echo "::set-output name=exists::true"
+            echo "EXISTS""
           else
-            echo "::set-output name=exists::false"
+            echo "DOESNT EXIST"
           fi
 
 
