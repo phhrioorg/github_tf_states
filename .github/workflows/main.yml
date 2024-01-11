@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   
-  Initialise_state_file_repoository:
+  Initialise_state_file_repository:
     runs-on: [self-hosted, linux, X64]                  # was   runs-on: ubuntu-latest  
     environment:
       name: development
@@ -80,8 +80,8 @@ jobs:
           cd init_states
           terraform fmt
 
-      - name: Terraform Plan
+      - name: Terraform Apply
         run: |
-          echo "Terraform Plan"...
+          echo "Terraform Apply"...
           cd init_states
-          terraform plan
+          terraform apply -var="state_bucket_prefix=$BUCKET" --var="dynamodb_table_name=$BUCKET" -auto-approve 
