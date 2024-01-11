@@ -51,9 +51,9 @@ jobs:
           # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
           if [ $STATE_FILE_EXISTS == 0 ]
           then
-            echo "EXISTS"
+            echo "STATE FILE EXISTS"
           else
-            echo "DOESNT EXIST"
+            echo "STATE FILE DOESN'T EXIST"
           fi
 
 
