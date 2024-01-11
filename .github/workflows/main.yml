@@ -58,10 +58,12 @@ jobs:
           echo "Terraform State File does NOT exist yet"...       
           cd init_states
           terraform init
+          pwd
 
       - name: Terraform Plan
         if: ${{ env.STATE_FILE_STATE == 0 }}
         run: |
+          pwd
           echo "Terraform State File does NOT exist yet"...       
           terraform plan -var="state_bucket_prefix=$BUCKET"
 
