@@ -14,8 +14,18 @@ permissions:
 
 jobs:
   
-  Initialise_state_file_repoository:
-    runs-on: [self-hosted, linux, X64]                  # was   runs-on: ubuntu-latest  
+  Initialise_staging_state_file_repoository:
+    runs-on: [self-hosted, linux, X64, staging]                  # was   runs-on: ubuntu-latest  
+    environment:
+      name: staging
+
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@master
+        
+
+  Initialise_development_state_file_repoository:
+    runs-on: [self-hosted, linux, X64, development]                  # was   runs-on: ubuntu-latest  
     environment:
       name: development
 
@@ -32,6 +42,7 @@ jobs:
 
       - name: Sts GetCallerIdentity
         run: |
+          echo $GITHUB_VAR
           env
           echo "CHECK ENV VARIABLES ${{ vars.GITHUB_VAR }}"
           aws sts get-caller-identity
