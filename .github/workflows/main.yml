@@ -12,9 +12,14 @@ permissions:
   id-token: write
   contents: read
 jobs:
+  
   Initialise_state_file_repoository:
+  
     runs-on: [self-hosted, linux, X64]
 #   runs-on: ubuntu-latest  
+
+    environment:
+      name: development
 
     steps:
       - name: Git clone the repository
