@@ -34,12 +34,13 @@ jobs:
 
       - name: Sts GetCallerIdentity
         run: |
-          echo $GITHUB_VAR
           env
-          echo "CHECK ENV VARIABLES ${{ vars.GITHUB_VAR }}"
+          echo "#########################################################################################################################"
           aws sts get-caller-identity
           aws s3 ls
+          echo "#########################################################################################################################"
           echo "Checking for file at s3://${{ vars.REPO_OWNER }}/${{ vars.REPOSITORY_NAME }}"
+          echo "#########################################################################################################################"
           # Execute a head-object command
           aws s3api head-object --bucket ${{ github.repository_owner }} --key ${{ github.ref_type }}
           # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
