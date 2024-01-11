@@ -39,7 +39,7 @@ jobs:
           aws sts get-caller-identity
           aws s3 ls
           echo "#########################################################################################################################"
-          echo "Checking for file at s3://${{ vars.REPO_OWNER }}/${{ vars.REPOSITORY_NAME }}"
+          echo "Checking for file at s3://${{ github.repository_owner }}/${{ vars.REPOSITORY_NAME }}"
           echo "#########################################################################################################################"
           # Execute a head-object command
           aws s3api head-object --bucket ${{ github.repository_owner }} --key ${{ github.ref_type }}
