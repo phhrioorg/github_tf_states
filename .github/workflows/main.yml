@@ -85,3 +85,9 @@ jobs:
           echo "Terraform Apply"...
           cd init_states
           terraform apply -var="state_bucket_prefix=$BUCKET" --var="dynamodb_table_name=$BUCKET" -auto-approve 
+
+      - name: Terraform Delete
+        run: |
+          echo "Terraform Delete"...
+          cd init_states
+          terraform delete -var="state_bucket_prefix=$BUCKET" --var="dynamodb_table_name=$BUCKET" -auto-approve 
