@@ -71,14 +71,17 @@ jobs:
       - name: Terraform Validate
         run: |
           echo "Terraform Validate"...
+          cd init_states
           terraform validate
 
       - name: Terraform Format
         run: |
           echo "Terraform Format"...
+          cd init_states
           terraform fmt
 
       - name: Terraform Plan
         run: |
           echo "Terraform Plan"...
+          cd init_states
           terraform plan
