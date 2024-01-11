@@ -52,7 +52,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Terraform Init
-        if: ${{ $STATE_FILE_EXISTS != 0 }}
+        if: $STATE_FILE_EXISTS != 0 }}
         run: |
           echo "Terraform Init TEST-BUILD"...       
           terraform init
