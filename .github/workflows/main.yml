@@ -65,6 +65,7 @@ jobs:
         run: |
           pwd
           echo "Terraform State File does NOT exist yet"...       
+          cd init_states
           terraform plan -var="state_bucket_prefix=$BUCKET"
 
       - name: Terraform Validate
