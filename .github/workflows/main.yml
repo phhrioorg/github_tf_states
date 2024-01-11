@@ -7,8 +7,10 @@ on:
 
 env:
     FILE: 'test'
-    REPOSITORY_OWNER: '${{ github.repository_owner}}'
-    BRANCH_NAME: '${{ github.ref_name }}'
+    REPOSITORY_OWNER: '${{ github.repository_owner}}' 
+    BRANCH_NAME:      '${{ github.ref_name }}'
+    BUCKET:           '${{ vars.TF_STATES_BUCKET }}'
+    STATE_FILE:       '${{ vars.TF_STATES_FILE}}'
 
 permissions:
   id-token: write
@@ -41,15 +43,15 @@ jobs:
           echo "#########################################################################################################################"
           echo "Checking for file at s3://${{ vars.TF_STATES_BUCKET }}/${{ vars.TF_STATES_FILE}}"
           echo "#########################################################################################################################"
-          ## Execute a head-object command
-          #aws s3api head-object --bucket $REPOSITORY_OWNER --key ${{ github.ref_type }}
-          ## XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
-          #if [ $? == 0 ]
-          #then
-          #  echo "::set-output name=exists::true"
-          #else
-          #  echo "::set-output name=exists::false"
-          #fi
+          # Execute a head-object command
+          aws s3api head-object --bucket $BUCKET --key $STATE_FILE
+          # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
+          if [ $? == 0 ]
+          then
+            echo "::set-output name=exists::true"
+          else
+            echo "::set-output name=exists::false"
+          fi
 
 
 #      - uses: hashicorp/setup-terraform@v3.0.0
