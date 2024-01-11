@@ -17,7 +17,7 @@ jobs:
   Initialise_state_file_repoository:
     runs-on: [self-hosted, linux, X64]                  # was   runs-on: ubuntu-latest  
     environment:
-      name: staging                                     # testing instead of development
+      name: development
 
     steps:
       - name: Git clone the repository
