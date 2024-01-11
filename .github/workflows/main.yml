@@ -41,7 +41,7 @@ jobs:
           echo "Checking for file at s3://${{ vars.TF_STATES_BUCKET }}/${{ vars.TF_STATES_FILE}}"
           set -e
           aws s3api head-object --bucket $BUCKET --key $STATE_FILE  && STATE_FILE_EXISTS=$? || STATE_FILE_EXISTS=$?
-          if [ $STATE_FILE_EXISTS == 0 ]
+          if [ ${{ env.STATE_FILE_EXISTS }} == 0 ]
           then
             echo "STATE FILE EXISTS"
           else
