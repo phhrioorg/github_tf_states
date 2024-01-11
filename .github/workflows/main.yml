@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   
-  Initialise_development_state_file_repoository:
+  Initialise_state_file_repoository:
     runs-on: [self-hosted, linux, X64]                  # was   runs-on: ubuntu-latest  
     environment:
       name: development
@@ -35,45 +35,26 @@ jobs:
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Sts GetCallerIdentity
+      - name: Check Terraform State file
         run: |
-          env | grep github_tf_states
-          echo "#########################################################################################################################"
           aws sts get-caller-identity
-          aws s3 ls
-          echo "#########################################################################################################################"
           echo "Checking for file at s3://${{ vars.TF_STATES_BUCKET }}/${{ vars.TF_STATES_FILE}}"
-          echo "#########################################################################################################################"
-          # Execute a head-object command
           set -e
           aws s3api head-object --bucket $BUCKET --key $STATE_FILE  && STATE_FILE_EXISTS=$? || STATE_FILE_EXISTS=$?
-          echo $STATE_FILE_EXISTS
-          # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
           if [ $STATE_FILE_EXISTS == 0 ]
           then
             echo "STATE FILE EXISTS"
           else
             echo "STATE FILE DOESN'T EXIST"
           fi
-
-
 #      - uses: hashicorp/setup-terraform@v3.0.0
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Terraform Init
+        if: ${{ $STATE_FILE_EXISTS != 0 }}
         run: |
-          echo "Terraform Init TEST-BUILD"...
-          echo "GITHUB_REF               ${{ github.ref }}"...               # refs/heads/[<BRANCH> | test-build | main]
-          echo "GITHUB_BASE_REF          ${{ github.base_ref }}"...          # 
-          echo "GITHUB_REF_NAME          ${{ github.ref_name }}"...          # <BRANCH> | test-build | main
-          echo "GITHUB_REF_TYPE          ${{ github.ref_type }}"...          # branch | test-build | ""
-          echo "GITHUB_WORKSPACE         ${{ github.workspace }}"...         # /home/paul/actions-runner/_work/github_tf_states/github_tf_states
-          echo "GITHUB_ACTION_REPOSITORY ${{ github.action_repository }}"... # 
-          echo "GITHUB_HEAD_REF          ${{ github.head_ref }}"...          # 
-          echo "GITHUB_REPOSITORY        ${{ github.repository }}"...        # phhrioorg/github_tf_states
-          echo "GITHUB_REPOSITORY_OWNER  ${{ github.repository_owner}}"...   # phhrioorg
-          
+          echo "Terraform Init TEST-BUILD"...       
           terraform init
 
       - name: Terraform Validate
