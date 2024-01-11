@@ -176,7 +176,7 @@ variable "override_s3_bucket_name" {
 variable "s3_bucket_name" {
   description = "If override_s3_bucket_name is true, use this bucket name instead of dynamic name with bucket_prefix"
   type        = string
-  default     = "phhrioorg-tf"
+  default     = ""
   validation {
     condition     = length(var.s3_bucket_name) == 0 || length(regexall("^[a-z0-9][a-z0-9\\-.]{1,61}[a-z0-9]$", var.s3_bucket_name)) > 0
     error_message = "Input variable s3_bucket_name is invalid. Please refer to https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html."
