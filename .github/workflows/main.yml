@@ -7,8 +7,8 @@ on:
 
 env:
     FILE: 'test'
-    REPO_OWNER: '${{ github.repository_owner}}'
-    REPOSITORY_NAME: '${{ github.ref_name }}'
+    REPOSITORY_OWNER: '${{ github.repository_owner}}'
+    BRANCH_NAME: '${{ github.ref_name }}'
 
 permissions:
   id-token: write
@@ -34,22 +34,22 @@ jobs:
 
       - name: Sts GetCallerIdentity
         run: |
-          env
+          env | grep github_tf_states
           echo "#########################################################################################################################"
           aws sts get-caller-identity
           aws s3 ls
           echo "#########################################################################################################################"
-          echo "Checking for file at s3://${{ github.repository_owner }}/$REPOSITORY_NAME"
+          echo "Checking for file at s3://$REPOSITORY_OWNER/$BRANCH_NAME"
           echo "#########################################################################################################################"
-          # Execute a head-object command
-          aws s3api head-object --bucket ${{ github.repository_owner }} --key ${{ github.ref_type }}
-          # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
-          if [ $? == 0 ]
-          then
-            echo "::set-output name=exists::true"
-          else
-            echo "::set-output name=exists::false"
-          fi
+          ## Execute a head-object command
+          #aws s3api head-object --bucket $REPOSITORY_OWNER --key ${{ github.ref_type }}
+          ## XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
+          #if [ $? == 0 ]
+          #then
+          #  echo "::set-output name=exists::true"
+          #else
+          #  echo "::set-output name=exists::false"
+          #fi
 
 
 #      - uses: hashicorp/setup-terraform@v3.0.0
