@@ -48,7 +48,7 @@ jobs:
           aws s3api head-object --bucket $BUCKET --key $STATE_FILE  && returncode=$? || returncode=$?
           echo $returncode
           # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
-          if [ $? == 0 ]
+          if [ $returncode == 0 ]
           then
             echo "::set-output name=exists::true"
           else
