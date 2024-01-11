@@ -12,6 +12,8 @@ env:
     BUCKET:           '${{ vars.TF_STATES_BUCKET }}'
     STATE_FILE:       '${{ vars.TF_STATES_FILE}}'
     STATE_FILE_STATE:  0
+    TF_VAR_state_bucket_prefix: $BUCKET-
+    TF_VAR_
 
 permissions:
   id-token: write
@@ -57,7 +59,7 @@ jobs:
           echo "Terraform State File does NOT exist yet"...       
           cd init_states
           terraform init
-          terraform apply
+          terraform plan -var="state_bucket_prefix=$BUCKET"
 
       - name: Terraform Validate
         run: |
