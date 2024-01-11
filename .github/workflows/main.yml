@@ -44,7 +44,9 @@ jobs:
           echo "Checking for file at s3://${{ vars.TF_STATES_BUCKET }}/${{ vars.TF_STATES_FILE}}"
           echo "#########################################################################################################################"
           # Execute a head-object command
-          aws s3api head-object --bucket $BUCKET --key $STATE_FILE
+          set -e
+          aws s3api head-object --bucket $BUCKET --key $STATE_FILE  && returncode=$? || returncode=$?
+          echo $returncode
           # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
           if [ $? == 0 ]
           then
