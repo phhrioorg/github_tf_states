@@ -80,11 +80,11 @@ jobs:
           cd init_states
           terraform fmt
 
-      - name: Terraform Apply
-        run: |
-          echo "Terraform Apply"...
-          cd init_states
-          terraform apply -var="state_bucket_prefix=$BUCKET" --var="dynamodb_table_name=$BUCKET" -auto-approve 
+#      - name: Terraform Apply
+#        run: |
+#          echo "Terraform Apply"...
+#          cd init_states
+#          terraform apply -var="state_bucket_prefix=$BUCKET" --var="dynamodb_table_name=$BUCKET" -auto-approve 
 
       - name: Terraform Delete
         run: |
